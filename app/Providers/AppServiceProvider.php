@@ -1,24 +1,33 @@
 <?php
 
-namespace App\Providers;
+namespace App\Policies;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\Task;
+use App\Models\User;
 
-class AppServiceProvider extends ServiceProvider
+class TaskPolicy
 {
     /**
-     * Register any application services.
+     * Пользователь может обновлять только свои задачи.
      */
-    public function register(): void
+    public function update(User $user, Task $task): bool
     {
-        //
+        return $user->id === $task->user_id;
     }
 
     /**
-     * Bootstrap any application services.
+     * Пользователь может удалять только свои задачи.
      */
-    public function boot(): void
+    public function delete(User $user, Task $task): bool
     {
-        //
+        return $user->id === $task->user_id;
+    }
+
+    /**
+     * Пользователь может просматривать только свои задачи.
+     */
+    public function view(User $user, Task $task): bool
+    {
+        return $user->id === $task->user_id;
     }
 }

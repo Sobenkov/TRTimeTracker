@@ -30,7 +30,7 @@ class TaskController extends Controller
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
-            'status' => $request->status ?? 'in_progress',
+            'status' => $request->status ?? Task::STATUS_IN_PROGRESS,
             'time_spent_minutes' => 0,
         ]);
 
@@ -39,14 +39,14 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        abort_if($task->user_id !== auth()->id(), 403);
+        $this->authorize('update', $task);
 
         return view('tasks.edit', compact('task'));
     }
 
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        abort_if($task->user_id !== auth()->id(), 403);
+        $this->authorize('update', $task);
 
         $data = $request->only(['title', 'description', 'status']);
 
@@ -62,7 +62,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        abort_if($task->user_id !== auth()->id(), 403);
+        $this->authorize('delete', $task);
         $task->delete();
 
         return redirect()->route('tasks.index');
