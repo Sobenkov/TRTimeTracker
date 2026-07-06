@@ -16,6 +16,7 @@ class Task extends Model
         'description',
         'status',
         'time_spent_minutes',
+        'started_at',
     ];
 
     protected function casts(): array
