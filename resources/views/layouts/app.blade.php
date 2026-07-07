@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen flex flex-col bg-gray-100">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -28,13 +28,19 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-1">
                 @isset($slot)
                     {{ $slot }}
                 @else
                     @yield('content')
                 @endisset
             </main>
+
+            <footer class="mt-20 bg-gray-800 border-t border-gray-700">
+                <div class="max-w-6xl mx-auto px-6 py-10">
+                    @include('layouts.footer')
+                </div>
+            </footer>
         </div>
     </body>
 </html>

@@ -8,7 +8,7 @@
         <section class="text-center">
 
         <span class="inline-flex rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-700">
-            TimeTracker
+            TRTimeTracker
         </span>
 
             <h1 class="mt-6 text-5xl font-bold tracking-tight text-gray-900">
